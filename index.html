@@ -1,5 +1,4 @@
 <!doctype html>
-<!--Vinay Bhaip vb4ztv-->
 <meta charset="UTF-8">
 <html>
 <style>
@@ -10,288 +9,190 @@
 		font-family: 'Noto Sans JP';
 		background: #f8f8ff;
 		margin: 0;
-		overflow: hidden;
+		font-size: 10px;
+		padding: 10px;
 	}
 
-	img {
-		width: 3vw;
-
-	}
-
-	#examples {
-		display: none;
-
-	}
-
-	.examplebutton{
-		background: #f8f8ff;
+	.container {
+		display: flex;
 		filter: drop-shadow(0 0.4rem 0.4rem rgba(0, 0, 0, 0.2));
-		font-family: 'Noto Sans JP';
-		border-radius: 5px;
-
-		border: 2px solid #2F2D2E;/*A974D4;*/
-		color: #2F2D2E;
-
-		outline: none;
-		width: 5vw;
-		height: 3vw;
-
-		margin: 0.5vw;
-
 	}
 
-	.examplebutton:hover{
-		border: 1px solid;
-
+	.settings {
+		flex: 0 0 25%;
+		max-width: 25%;
 	}
 
-	#minitext {
-		position: absolute;
-		bottom: 0vh;
-		right: 1vh;
-		font-size: 0.8vw;
-
+	.simulation {
+		flex: 1;
+		background-color: #c4b7b7;
+		filter: drop-shadow(0 0.4rem 0.4rem rgba(0, 0, 0, 0.2));
 	}
 
-	#simcontrol {
-		display: flex;
-		justify-content: center;
+	@media screen and (max-width: 768px) {
+		.container {
+			flex-wrap: wrap;
+		}
+
+		.settings,
+		.simulation {
+			flex: 0 0 100%;
+			max-width: 100%;
+		}
 
 	}
-
-
-	#jumpahead{
-		width: 20vw;
-		margin-left: auto;
-		margin-right: auto;
-		text-align: center;
-		margin-top: 0vmax;
-		height: 2vmax;
-		display: block;
-		font-size: 0.8vmax;
-	}
-
-	a{
-		color: #A974D4
-
-	}
-
-	p{
-		font-size: 1.2vmax;
-	}
-
-	#simhelp {
-		width: 28%;
-		display: none;
-		position: absolute;
-
-	}
-
-	#simhelp p{
-		color: #2F2D2E;
-		opacity: 0.5;
-		font-size: 0.8vmax;
-
-	}
-
-	#simchoicecontainer {
-		width: 30vw;
-		display: none; 
-		justify-content: center;
-
-	}
-
-
-	#description {
-		width: 55vw;
-		margin-left: auto;
-		margin-right: auto;
-		text-align: center;
-		margin-bottom: 3vw;
-		margin-top: -0.0vmax;
-		height: 4vmax;
-		font-size: 1.2vw;
-	}
-
-	#nav {
-		width: 40vw;
-		margin-left: auto;
-		margin-right: auto;
-
-		display: flex;
-		justify-content: center;
-	}
-
-	#bottombar {
-		width: 80vw;
-		height: 8vw;
-		margin: 10vw;
-		margin-top: 2vmax;
-		padding: 0;
-		display: block;
-
-	}
-
 
 	#tooltip {
-		white-space: pre-wrap;
+		padding-left: 5px;
 		background: white;
 		border-radius: 3px;
-		/*
-		width: 10vw;
-		height: 10vw;
-		*/
-		padding: 1vw;
 		filter: drop-shadow(0 0.4rem 0.4rem rgba(0, 0, 0, 0.2));
 	}
 
-	.navbutton {
-		background: white;
-		filter: drop-shadow(0 0.4rem 0.4rem rgba(0, 0, 0, 0.2));
-		font-family: 'Noto Sans JP';
-		border-radius: 5px;
-		
-
-		border: 2px solid #A974D4;
-		color: #A974D4;
-
-		outline: none;
-		width: 7vw;
-		height: 3vw;
-		font-size: 1.2vw;
-
-		transition: 0.3s;
-		
-		margin: 0 2vw;
+	#tooltip ul {
+		list-style: none;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 
-	.navbutton:hover{
-		background: #A974D4;
-		color: white;
-	}
-	.navbutton:disabled{
-		background: white;
-		color: #A974D4;
-		opacity: 0.2;
+	.intro {
+		font-size: 9px;
+		padding: 5px;
 	}
 
-	.simbutton {
-		background: white;
-		filter: drop-shadow(0 0.4rem 0.4rem rgba(0, 0, 0, 0.2));
-		font-family: 'Noto Sans JP';
-		border-radius: 5px;
+	.description {
+		font-size: 8px;
+		font-style: italic;
+		padding: 5px;
+	}
 
-		border: 3px solid #2F2D2E;/*A974D4;*/
-		color: #2F2D2E;
+	.inputcontrol {
+		width: 90%;
+		padding: 2px;
+	}
 
-		outline: none;
-		width: 11vw;
-		height: 3vw;
-		font-size: 1vw;
+	.controltitle {
 		font-weight: bold;
-
-		margin: 0.5vw;
-
-		transition: 0.3s;
 	}
 
-	.simbutton:hover{
-		background: #2F2D2E;
-		color: white;
+	h2 {
+		padding: 5px;
 	}
 
-	.simbutton:disabled {
-		background: white;
-		color: #2F2D2E;
-		opacity: 0.1
-
-
+	h3 {
+		padding: 5px;
 	}
 
-	#simchoice {
-		background: white;
-		color: #2F2D2E;
-		font-family: 'Noto Sans JP';
-		outline: none;
-
-		width: 11vw;
-		height: 3vw;
-
-		border: 2px solid #2F2D2E;
-		border-radius: 3px;
-		filter: drop-shadow(0 0.4rem 0.4rem rgba(0, 0, 0, 0.2));
+	.simcontrol {
+		margin: auto;
+		width: 50%;
+		padding: 10px;
 	}
-
 
 </style>
-	<head>
-		<title>Ranked Choice Voting: A More Representative Democracy?</title>
-		<script src="https://d3js.org/d3-force.v2.min.js"></script>
-		<script src="https://d3js.org/d3-random.v2.min.js"></script>
-		<!--<script src="https://d3js.org/d3.v5.js"></script>-->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.5.0/d3.min.js"></script>
-		<script src="https://unpkg.com/@stdlib/stdlib@0.0.91/dist/stdlib-flat.min.js"></script>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-169278409-1"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
 
-			gtag('config', 'UA-169278409-1');
-		</script>
-	</head>
-	<body>
-		<div style="margin: 0">
-			<svg id="viz">
+<head>
+	<title>Simulador de Voto Cuadrático</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<script src="https://unpkg.com/@stdlib/stdlib@0.0.91/dist/stdlib-flat.min.js"></script>
+</head>
+
+<body>
+
+	<h1>Simulador de Voto Cuadrático</h1>
+
+	<div class="intro">
+		<p>Este simulador acompaña al post "El voto cuadrático" publicado en el blog de Gestiona de esPublico que puedes ver <a href="https://espublicogestiona.com/ai-on-quantumsteroids-vs-seguridad/">aquí</a>. También puedes acceder al código de la simulación <a href="https://espublicogestiona.com/ai-on-quantumsteroids-vs-seguridad/">aquí</a>.</p>
+
+		<p>USO: Ajusta los parámetros a tu gusto, y observa cómo la simulación se adapta de manera dinámica a tus cambios. Tienes a tu disposición dos sistemas de votación: el simple y el
+		cuadrático. Para visualizar el resultado de la votación basado en tu selección, simplemente presiona el botón correspondiente a cada sistema. Sumérgete en esta experiencia interactiva y
+		disfruta de la exploración de los distintos resultados.</p></div>
+
+
+	<div class="container">
+		<div class="settings" id="settings">
+
+			<h2>Parámetros</h2>
+
+
+			<div class="simchoicecontainer">
+				<p class="controltitle">Número de votantes</p>
+				<select name="simsize" id="simsize" class="inputcontrol">
+					<option value="10">10</option>
+					<option value="25">25</option>
+					<option value="100" selected>100</option>
+					<option value="300">300</option>
+				</select>
+				<div class="description"> El número de votantes en una simulación de votación es crucial para su interpretación. Con pocos votantes, podemos entender mejor los mecanismos básicos del
+					sistema y observar cómo las acciones individuales influyen en los resultados. Con un mayor número de votantes proporciona resultados más robustos estadísticamente, reflejando la
+					diversidad y variabilidad de las preferencias de los votantes en una población real, resultando en una simulación más precisa y realistas.</div>
+			</div>
+
+
+			<div class="simchoicecontainer">
+				<p class="controltitle">Distribución ideológica del electorado:</p>
+
+				<select name="simchoice" id="simchoice" class="inputcontrol">
+					<option value="gauss">Normal</option>
+					<option value="bimodgauss">Con dos focos</option>
+					<option value="uniform">Uniforme</option>
+					<option value="leftskew">Tendencia a un lado</option>
+					<option value="rightskew">Tendencia a otro lado</option>
+				</select>
+
+				<div class="description" id="simchoice-description"> </div>
+			</div>
+
+
+			<svg id="viz-settings">
 				<defs>
 					<linearGradient id="redbluegrad" x1="0%" y1="0%" x2="100%" y2="0%">
-						<stop offset="0%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
-						<stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+						<stop offset="0%" style="stop-color:#38bc04;stop-opacity:1" />
+						<stop offset="100%" style="stop-color:#044005;stop-opacity:1" />
 					</linearGradient>
-			  </defs>
+				</defs>
 			</svg>
-			<div id="simcontrol">
-				<button hidden class="simbutton" id="simfptp" >Simulate FPTP</button>
-				<button hidden class="simbutton" id="simranked">Simulate RCV</button>
-				<button hidden class="simbutton" id="reset">Reset Simulation</button>
-			</div>
-			<div id="examples">
-				Try me: 
-				<button class="examplebutton" id ="example1button"><img src="images/example1.png"> </img></button>
-				<button class="examplebutton" id ="example2button"><img src="images/example2.png"> </img></button>
-				<button class="examplebutton" id ="example3button"><img src="images/example3.png"> </img></button>
 
-			</div>
-			<div id="simchoicecontainer">
-				Distribution of voter ideologies:  
-				<select name="simchoice" id="simchoice">
-					<option value="gauss">Normal</option>
-					<option value="bimodgauss">Two Peaks</option>
-					<option value="uniform">Uniform</option>
-					<option value="leftskew">Lean Conservative</option>
-					<option value="rightskew">Lean Liberal</option>
+			<div class="description" id="simchoice-description"> Los círculos representan las opciones de la votación. Puedes arrastrarlos sobre la distribución ideológica. Pulsa en la barra para
+				añadir más opciones o sobre uno de los cirulos con el botón derecho para eliminarlo. </div>
+
+			<div class="inputcontainer">
+				<p class="controltitle">Contexto de la votación</p>
+				<select name="simcontext" id="simcontext" class="inputcontrol">
+					<option value="HighStability">Alta estabilidad</option>
+					<option value="NormalStability" selected>Estabilidad moderada</option>
+					<option value="LowStability">Baja estabilidad</option>
 				</select>
+				<div class="description" id="simcontext-description"> </div>
 			</div>
-			<div id="simhelp">
-				<p>Help: To simulate an election, click the two simulate buttons. The distribution curve at the top represents the distribution of voter beliefs across the political spectrum. Below the distribution is a bar that shows where candidates lie on that spectrum. Try dragging the candidates around. To add a candidate, click on an open spot on the bar. To remove a candidate, right-click on the candidate.</p>
-			</div>
-			<br/>
-			<div id="bottombar">
-				<p id="description"></p>
-				<br/>
-				<div id="nav">
-					<button class="navbutton" id="prev" >Previous</button>
-					<button class="navbutton" id="next">Next</button>
-				<div />
-			</div>
+
 		</div>
-		</br>
-		<p id="jumpahead">Been here before? Jump to the <a id="jumpaheadlink" href="javascript:;" onclick="jumpAhead()">simulation</a>.</p>
 
-		<p id="minitext"><a target="_blank" href="https://github.com/vbhaip/ranked-vote-vis">Open-source</a></p>
+		<div class="simulation" id="main">
+			<h2>Simulación</h2>
+			<div>
+				<h3 id="simulation-description-title">Fase</h3>
 
-		<script src="index.js"></script>
-	</body>
+				<div class="description" id="simulation-description"> vvv.</div>
+
+
+				<div class="simcontrol">
+					<button class="simbutton" id="runs">Visualizar votación simple</button>
+					<button class="simbutton" id="runq">Visualizar votación cuadrática</button>
+				</div>
+			</div>
+			<svg id="viz">
+
+			</svg>
+
+
+		</div>
+
+	</div>
+
+
+	<script src="index.js"></script>
+</body>
 
 </html>
