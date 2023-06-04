@@ -15,6 +15,7 @@
 
 	.container {
 		display: flex;
+		column-gap: 0.875rem;
 		filter: drop-shadow(0 0.4rem 0.4rem rgba(0, 0, 0, 0.2));
 	}
 
@@ -27,6 +28,7 @@
 		flex: 1;
 		background-color: #c4b7b7;
 		filter: drop-shadow(0 0.4rem 0.4rem rgba(0, 0, 0, 0.2));
+
 	}
 
 	@media screen and (max-width: 768px) {
@@ -67,7 +69,7 @@
 	}
 
 	.inputcontrol {
-		width: 90%;
+		width: 100%;
 		padding: 2px;
 	}
 
@@ -89,6 +91,10 @@
 		padding: 10px;
 	}
 
+	#viz-settings {
+		background-color: #d4d4d4;
+	}
+
 </style>
 
 <head>
@@ -103,7 +109,7 @@
 	<h1>Simulador de Voto Cuadrático</h1>
 
 	<div class="intro">
-		<p>Este simulador acompaña al post "El voto cuadrático" publicado en el blog de Gestiona de esPublico que puedes ver <a href="https://espublicogestiona.com/ai-on-quantumsteroids-vs-seguridad/">aquí</a>. También puedes acceder al código de la simulación <a href="https://espublicogestiona.com/ai-on-quantumsteroids-vs-seguridad/">aquí</a>.</p>
+		<p>Este simulador acompaña al post "El voto cuadrático" publicado en el blog de esPublico Gestiona, que puedes ver <a href="https://espublicogestiona.com/ai-on-quantumsteroids-vs-seguridad/">aquí</a>. También puedes acceder al código de la simulación <a href="https://github.com/d4c7/simulador-voto-cuadratico">aquí</a>.</p>
 
 		<p>USO: Ajusta los parámetros a tu gusto, y observa cómo la simulación se adapta de manera dinámica a tus cambios. Tienes a tu disposición dos sistemas de votación: el simple y el
 		cuadrático. Para visualizar el resultado de la votación basado en tu selección, simplemente presiona el botón correspondiente a cada sistema. Sumérgete en esta experiencia interactiva y
@@ -174,7 +180,7 @@
 			<div>
 				<h3 id="simulation-description-title">Fase</h3>
 
-				<div class="description" id="simulation-description"> vvv.</div>
+				<div class="description" id="simulation-description">desc</div>
 
 
 				<div class="simcontrol">

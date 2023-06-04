@@ -1,8 +1,3 @@
-
-
-var updateChoices;
-
-
 window.addEventListener('load', function () {
 
 
@@ -40,7 +35,7 @@ window.addEventListener('load', function () {
 
 	const VotingContextFeatures = (function () {
 		const m = [];
-		m[VotingContext.HighStability] = { name: "Estabilidad Alta", voterTypeDistribution:  [0.5, 0.3, 0.19, 0.01], description: "En este contexto, se refiere a una situación en la que las condiciones económicas, políticas y sociales son generalmente positivas y predecibles. Los cambios son graduales y generalmente se anticipan con suficiente antelación. En un escenario de alta estabilidad, los votantes pueden sentirse más seguros y confiados en sus decisiones de voto, y puede haber menos fluctuaciones en las preferencias de voto." };
+		m[VotingContext.HighStability] = { name: "Estabilidad Alta", voterTypeDistribution: [0.5, 0.3, 0.19, 0.01], description: "En este contexto, se refiere a una situación en la que las condiciones económicas, políticas y sociales son generalmente positivas y predecibles. Los cambios son graduales y generalmente se anticipan con suficiente antelación. En un escenario de alta estabilidad, los votantes pueden sentirse más seguros y confiados en sus decisiones de voto, y puede haber menos fluctuaciones en las preferencias de voto." };
 		m[VotingContext.NormalStability] = { name: "Estabilidad Normal", voterTypeDistribution: [0.3, 0.4, 0.25, 0.05], description: "Este es un escenario intermedio en el que hay cierto grado de incertidumbre y cambio, pero también cierta previsibilidad y continuidad. Las condiciones económicas, políticas y sociales pueden estar en un estado de cambio moderado, y los votantes pueden cambiar sus preferencias de voto en respuesta a estos cambios, pero no necesariamente de manera radical o impredecible.", };
 		m[VotingContext.LowStability] = { name: "Estabilidad Baja", voterTypeDistribution: [0.1, 0.25, 0.55, 0.10], description: "Este es un escenario en el que hay una gran cantidad de incertidumbre y cambio. Las condiciones económicas, políticas y sociales pueden ser volátiles y cambiar rápidamente y de formas impredecibles. En un escenario de baja estabilidad, los votantes pueden sentirse inseguros y confundidos, y las preferencias de voto pueden fluctuar ampliamente." };
 		return m;
@@ -62,7 +57,7 @@ window.addEventListener('load', function () {
 
 	const rmain = document.getElementById("main").getBoundingClientRect();
 	const width = Math.max(700, rmain.width);
-	const height = Math.max(500, rmain.height);
+	const height = Math.max(400, rmain.height);
 
 	const r = document.getElementById("settings").getBoundingClientRect();
 	const widthSettings = r.width;
@@ -130,11 +125,7 @@ window.addEventListener('load', function () {
 		"Opción E"
 	]
 
-
-
-
-
-	updateChoices = function () {
+	const updateSettings = function () {
 		const simchoiceDesc = document.getElementById("simchoice-description");
 		const idf = IdeologicalDistributionFeatures[simdistrib];
 		simchoiceDesc.innerText = idf.description;
@@ -144,7 +135,6 @@ window.addEventListener('load', function () {
 		simcontextDesc.innerText = vcf.description;
 
 	}
-
 
 
 	//called at each simulation tick
@@ -232,22 +222,12 @@ window.addEventListener('load', function () {
 					.style('display', 'none')
 			})
 			.on('click', (event, d) => {
-				/*				const item = d3.select(event.currentTarget);
-								item
-								.style("stroke", "black")
-								.style("opacity", 1)
-				*/
 				d3.selectAll("[voterid='" + d.id + "']")
 					.style("stroke", "black")
 					.style("opacity", 1)
-
-				d3.selectAll(".viz-shape:not([voterid='" + d.id + "'])")
+				d3.selectAll(".viz-shape:not([voterid='" + d.id + "']),.viz-shape-2:not([voterid='" + d.id + "'])")
 					.style("opacity", 0.5)
 					.style("stroke", "none")
-				d3.selectAll(".viz-shape-2:not([voterid='" + d.id + "'])")
-					.style("opacity", 0.5)
-					.style("stroke", "none")
-
 
 			})
 	}
@@ -374,6 +354,7 @@ window.addEventListener('load', function () {
 
 		const optionVotes = new Array(tot_candidates + 1).fill(0);
 
+
 		data.forEach(v => {
 			if (0 == v.votes.length) {
 				optionVotes[0] += quadratic ? data.meta.maxVotes : 1;
@@ -399,6 +380,7 @@ window.addEventListener('load', function () {
 			dot.newx = (x * 1.0) / (tot_candidates + 1);
 		}
 
+		//TODO: group alt 
 		let x_locs = Array.from({ length: tot_candidates + 1 }, (_, i) => i).map(x => x * 1.0 / (tot_candidates + 1))
 
 		let all_subset_dots = x_locs.map(x => data.filter(dot => dot.newx == x));
@@ -679,6 +661,7 @@ window.addEventListener('load', function () {
 				votes: preferenceIndices,
 				remainingPoints: remainingPoints,
 				totalPoints: totalPoints,
+				//x: Math.random(),
 				x: 0.5,
 				y: 0.5
 			}
@@ -702,11 +685,13 @@ window.addEventListener('load', function () {
 
 	//update the simulation
 	function updateSimulationInit() {
-		updateChoices();
+		updateSettings();
+		drawSimulation()
+		clearGraph()
 		simulationBallots = simulate(candidates, simsize, simcontext);
 		initializeElectionData(simulationBallots, candidates);
 		renderGraph("viz-shape", simulationBallots);
-		runRound(simulationBallots, 0, 0.2)
+		runRound(simulationBallots, 0, 0.17)
 	}
 
 	function drawCandidates(w, xmid, ymid) {
@@ -734,7 +719,7 @@ window.addEventListener('load', function () {
 					.style("cursor", "grabbing");
 
 
-				clearDescriptionText()
+
 
 			}
 
@@ -772,7 +757,6 @@ window.addEventListener('load', function () {
 					if (candidates.length >= 5) {
 						return
 					}
-					console.log(candidates)
 					let ind = (event.x - xstart) / scaledw
 					candidates.push({
 						index: ind,
@@ -781,11 +765,8 @@ window.addEventListener('load', function () {
 						y: scaleYSettings(ymid)
 					})
 
-					clearDescriptionText()
-
 					updateSimulationInit();
 					drawCandSliders()
-					console.log(candidates)
 
 				})
 				.attr("id", "rectslider")
@@ -828,7 +809,7 @@ window.addEventListener('load', function () {
 						.call(updateSimulationInit)
 
 
-					clearDescriptionText()
+
 
 				})
 				.attr("fill", (d, i) => scaleColor[i])
@@ -1029,40 +1010,19 @@ window.addEventListener('load', function () {
 
 	}
 
-	function clearDescriptionText() {
-		d3.select("#description")
-			.style("opacity", 0)
-			.style("width", "0vw")
-	}
 
 	simChoiceSelect.onchange = () => {
-		clearDescriptionText()
-
 		simdistrib = simChoiceSelect.value
-		drawSimulation()
-		clearGraph()
-
 		updateSimulationInit()
 	}
 
 	simContextSelect.onchange = () => {
-		clearDescriptionText()
-
 		simcontext = simContextSelect.value
-		drawSimulation()
-		clearGraph()
-
 		updateSimulationInit()
 	}
 
-
 	simSizeInput.onchange = () => {
-		clearDescriptionText()
-
 		simsize = parseInt(simSizeInput.value)
-		drawSimulation()
-		clearGraph()
-
 		updateSimulationInit()
 	}
 
@@ -1105,14 +1065,6 @@ window.addEventListener('load', function () {
 
 	}
 
-
-	let update = () => {
-
-		drawSimulation()
-		clearGraph()
-		updateSimulationInit()
-	};
-
 	//fade in to start
 	d3.select("body")
 		.style("opacity", 0)
@@ -1121,18 +1073,16 @@ window.addEventListener('load', function () {
 		.style("opacity", 1);
 
 
-	updateChoices();
-	update();
-
-
 	runsButton.onclick = () => {
-		runRound(simulationBallots, 1, 0.6, false)
+		runRound(simulationBallots, 1, 0.7, false)
 	}
 
 
 	runqButton.onclick = () => {
-		runRound(simulationBallots, 1, 0.6, true)
+		runRound(simulationBallots, 1, 0.7, true)
 	}
 
+
+	updateSimulationInit();
 
 })
